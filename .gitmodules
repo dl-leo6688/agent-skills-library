@@ -1,0 +1,18 @@
+[submodule "skills/anthropic-skills"]
+	path = skills/anthropic-skills
+	url = git@github.com:anthropics/skills.git
+[submodule "skills/addyosmani-agent-skills"]
+	path = skills/addyosmani-agent-skills
+	url = git@github.com:addyosmani/agent-skills.git
+[submodule "skills/context-engineering"]
+	path = skills/context-engineering
+	url = git@github.com:muratcankoylan/Agent-Skills-for-Context-Engineering.git
+[submodule "skills/awesome-agent-skills"]
+	path = skills/awesome-agent-skills
+	url = git@github.com:VoltAgent/awesome-agent-skills.git
+[submodule "skills/vercel-skills-cli"]
+	path = skills/vercel-skills-cli
+	url = git@github.com:vercel-labs/skills.git
+[submodule "tools/SkillSpector"]
+	path = tools/SkillSpector
+	url = git@github.com:NVIDIA/SkillSpector.git
