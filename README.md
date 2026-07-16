@@ -35,17 +35,66 @@
 
 ## 🚀 快速开始
 
-### 1. 克隆仓库（含所有子模块）
+### 1. 克隆仓库
 
 ```bash
-git clone --recurse-submodules https://github.com/dl-leo6688/agent-skills-library.git
+git clone https://github.com/dl-leo6688/agent-skills-library.git
+cd agent-skills-library
 ```
 
-### 2. 更新所有技能到最新
+### 2. 下载所有技能包
 
 ```bash
-git submodule update --remote --recursive
+bash setup.sh install
 ```
+
+> 此脚本会克隆全部 6 个子仓库到 `skills/` 和 `tools/` 目录。
+
+### 3. 更新所有技能到最新
+
+```bash
+bash setup.sh update
+```
+
+---
+
+## 🔌 激活到 VS Code Copilot
+
+仓库下载后只是本地静态储备，需要挂载到 VS Code 才能被 Copilot 识别。
+
+`setup.sh` 提供三种激活模式（在**目标工作区根目录**下执行）：
+
+### 方案 A：链接工作区指令（最轻量）
+
+将 `copilot-instructions.md` 链接到目标工作区的 `.github/`，Copilot 会读取技能索引但不自动加载技能文件。
+
+```bash
+bash setup.sh activate-a /path/to/your/workspace
+```
+
+### 方案 B：注册 58 个技能目录 ⭐推荐
+
+将所有技能目录软链接到目标工作区的 `.github/skills/`，Copilot 按需加载每个技能的 `SKILL.md`。
+
+```bash
+bash setup.sh activate-b /path/to/your/workspace
+```
+
+### 方案 C：复制到用户级全局生效
+
+复制技能到 `~/.claude/skills/`，所有工作区通用。
+
+```bash
+bash setup.sh activate-c
+```
+
+### 验证激活
+
+```bash
+ls .github/skills/ | wc -l   # 应输出 58
+```
+
+> 激活后建议重启 VS Code 或新开 Copilot Chat 会话。
 
 ---
 
@@ -59,15 +108,28 @@ git submodule update --remote --recursive
 
 ```
 agent-skills-library/
+├── setup.sh                        # 🔧 安装 & 激活脚本
+├── copilot-instructions.md         # 📋 Copilot 工作区指令
+├── SKILLS_CATALOG.md               # 📖 58 个技能完整目录
 ├── skills/
-│   ├── anthropic-skills/           # 17 skills
-│   ├── addyosmani-agent-skills/    # 24 skills
-│   ├── context-engineering/        # 17 skills
+│   ├── anthropic-skills/           # 17 skills (an-- 前缀)
+│   ├── addyosmani-agent-skills/    # 24 skills (addy-- 前缀)
+│   ├── context-engineering/        # 17 skills (ctx-- 前缀)
 │   ├── awesome-agent-skills/       # 1497+ index
 │   └── vercel-skills-cli/          # CLI tool
-├── tools/SkillSpector/             # Security scanner
-└── reports/                        # Audit reports
+├── tools/SkillSpector/             # 🛡️ Security scanner
+└── reports/                        # 📊 Audit reports
 ```
+
+### 技能前缀说明
+
+激活时为避免不同技能包间的同名冲突，每个技能会加来源前缀：
+
+| 前缀 | 来源 | 示例 |
+|------|------|------|
+| `an--` | Anthropic | `an--docx`, `an--pdf` |
+| `addy--` | AddyOsmani | `addy--test-driven-development` |
+| `ctx--` | Context Engineering | `ctx--memory-systems` |
 
 ---
 
