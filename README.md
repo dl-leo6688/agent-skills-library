@@ -56,45 +56,12 @@ bash setup.sh install
 bash setup.sh update
 ```
 
----
-
-## 🔌 激活到 VS Code Copilot
-
-仓库下载后只是本地静态储备，需要挂载到 VS Code 才能被 Copilot 识别。
-
-`setup.sh` 提供三种激活模式（在**目标工作区根目录**下执行）：
-
-### 方案 A：链接工作区指令（最轻量）
-
-将 `copilot-instructions.md` 链接到目标工作区的 `.github/`，Copilot 会读取技能索引但不自动加载技能文件。
-
-```bash
-bash setup.sh activate-a /path/to/your/workspace
+更新后审计：
+```powershell
+.\scripts\scan_skills.ps1
 ```
 
-### 方案 B：注册 58 个技能目录 ⭐推荐
-
-将所有技能目录软链接到目标工作区的 `.github/skills/`，Copilot 按需加载每个技能的 `SKILL.md`。
-
-```bash
-bash setup.sh activate-b /path/to/your/workspace
-```
-
-### 方案 C：复制到用户级全局生效
-
-复制技能到 `~/.claude/skills/`，所有工作区通用。
-
-```bash
-bash setup.sh activate-c
-```
-
-### 验证激活
-
-```bash
-ls .github/skills/ | wc -l   # 应输出 58
-```
-
-> 激活后建议重启 VS Code 或新开 Copilot Chat 会话。
+> 💡 `git pull`（本仓库自身更新）会通过 `post-merge` hook 自动触发安全扫描。
 
 ---
 
@@ -102,15 +69,51 @@ ls .github/skills/ | wc -l   # 应输出 58
 
 所有技能已通过 [NVIDIA SkillSpector](https://github.com/NVIDIA/SkillSpector) v2.3.13 静态扫描，**无真实恶意代码发现**。
 
+### 快速扫描
+
+```powershell
+# 扫描所有技能包
+.\scripts\scan_skills.ps1
+
+# 查看误报基线
+cat .skillspector-baseline.yaml
+```
+
+### 安全门禁
+
+| 评分 | 建议 | 操作 |
+|------|------|------|
+| SAFE (0-20) | 通过 | ✅ 自动加载 |
+| CAUTION (21-50) | 警告 | ⚠️ 人工审查 |
+| DO_NOT_INSTALL (>50) | 阻止 | 🚫 禁止加载 |
+
+### 新增第三方技能流程
+
+```powershell
+# 1. 扫描
+uv run --project tools/SkillSpector skillspector scan ./new-skill/ --no-llm --baseline .skillspector-baseline.yaml
+
+# 2. 如果通过，加入安全基线
+uv run --project tools/SkillSpector skillspector baseline ./new-skill/ --no-llm -o .skillspector-baseline.yaml
+
+# 3. 在 copilot-instructions.md 中注册
+```
+
 ---
 
 ## 📁 目录结构
 
 ```
 agent-skills-library/
+<<<<<<< HEAD
 ├── setup.sh                        # 🔧 安装 & 激活脚本
 ├── copilot-instructions.md         # 📋 Copilot 工作区指令
 ├── SKILLS_CATALOG.md               # 📖 58 个技能完整目录
+=======
+├── .skillspector-baseline.yaml     # 误报基线（安全扫描用）
+├── scripts/
+│   └── scan_skills.ps1             # 批量安全扫描脚本
+>>>>>>> e605fa2 (feat: SkillSpector 安全审计深度集成)
 ├── skills/
 │   ├── anthropic-skills/           # 17 skills (an-- 前缀)
 │   ├── addyosmani-agent-skills/    # 24 skills (addy-- 前缀)

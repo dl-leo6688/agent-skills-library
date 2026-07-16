@@ -1,0 +1,32 @@
+#!/bin/sh
+# SkillSpector Security Auto-Scan Hook (post-merge)
+#
+# 安装: 复制此文件到 .git/hooks/post-merge
+#   cp scripts/post-merge.hook .git/hooks/post-merge
+#   chmod +x .git/hooks/post-merge
+#
+# 触发时机: git pull / git merge 完成后自动运行
+# 行为: 扫描全部技能包，如有 BLOCKED 则警告但不阻断
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+SCANNER="$REPO_ROOT/scripts/scan_skills.ps1"
+
+echo ""
+echo "========================================"
+echo "  SkillSpector - Post-Merge Security Scan"
+echo "========================================"
+
+if [ -f "$SCANNER" ]; then
+    powershell.exe -ExecutionPolicy Bypass -File "$SCANNER"
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -ne 0 ]; then
+        echo ""
+        echo "!!! SECURITY WARNING !!!"
+        echo "SkillSpector found BLOCKED skill packs."
+        echo "Review reports in $REPO_ROOT/reports/"
+        echo "Run manually: .\\scripts\\scan_skills.ps1"
+        echo ""
+    fi
+else
+    echo "[WARN] Scanner not found: $SCANNER"
+fi

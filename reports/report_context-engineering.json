@@ -1,0 +1,1636 @@
+{
+  "multi_skill": true,
+  "skill_count": 17,
+  "max_risk_score": 35,
+  "skills": [
+    {
+      "name": "advanced-evaluation",
+      "path": "advanced-evaluation",
+      "risk_score": 0,
+      "risk_severity": "LOW",
+      "finding_count": 1,
+      "skill": {
+        "name": "advanced-evaluation",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\advanced-evaluation",
+        "scanned_at": "2026-07-16T08:52:37.359148+00:00"
+      },
+      "risk_assessment": {
+        "score": 0,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 409,
+          "executable": false,
+          "size_bytes": 17399
+        },
+        {
+          "path": "references/bias-mitigation.md",
+          "type": "markdown",
+          "lines": 288,
+          "executable": false,
+          "size_bytes": 9366
+        },
+        {
+          "path": "references/evaluation-pipeline.md",
+          "type": "markdown",
+          "lines": 43,
+          "executable": false,
+          "size_bytes": 2934
+        },
+        {
+          "path": "references/implementation-patterns.md",
+          "type": "markdown",
+          "lines": 315,
+          "executable": false,
+          "size_bytes": 9376
+        },
+        {
+          "path": "references/metrics-guide.md",
+          "type": "markdown",
+          "lines": 331,
+          "executable": false,
+          "size_bytes": 9664
+        },
+        {
+          "path": "scripts/evaluation_example.py",
+          "type": "python",
+          "lines": 392,
+          "executable": true,
+          "size_bytes": 14087
+        }
+      ],
+      "issues": [],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 6,
+        "scanned_components": 6,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 1,
+        "findings_after_filtering": 0,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)",
+          "1 finding(s) filtered by meta-analyzer or heuristics"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "bdi-mental-states",
+      "path": "bdi-mental-states",
+      "risk_score": 6,
+      "risk_severity": "LOW",
+      "finding_count": 1,
+      "skill": {
+        "name": "bdi-mental-states",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\bdi-mental-states",
+        "scanned_at": "2026-07-16T08:52:37.961282+00:00"
+      },
+      "risk_assessment": {
+        "score": 6,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 373,
+          "executable": false,
+          "size_bytes": 18111
+        },
+        {
+          "path": "references/bdi-ontology-core.md",
+          "type": "markdown",
+          "lines": 207,
+          "executable": false,
+          "size_bytes": 6689
+        },
+        {
+          "path": "references/framework-integration.md",
+          "type": "markdown",
+          "lines": 582,
+          "executable": false,
+          "size_bytes": 21565
+        },
+        {
+          "path": "references/rdf-examples.md",
+          "type": "markdown",
+          "lines": 315,
+          "executable": false,
+          "size_bytes": 11441
+        },
+        {
+          "path": "references/sparql-competency.md",
+          "type": "markdown",
+          "lines": 420,
+          "executable": false,
+          "size_bytes": 9802
+        }
+      ],
+      "issues": [
+        {
+          "id": "P6",
+          "category": "System Prompt Leakage",
+          "pattern": "Direct Prompt Extraction",
+          "severity": "HIGH",
+          "confidence": 0.255,
+          "location": {
+            "file": "references/framework-integration.md",
+            "start_line": 139,
+            "end_line": null
+          },
+          "finding": "return rules",
+          "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+          "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+          "code_snippet": "            )\n            rules.append(rule)\n    \n    return rules\n\ndef format_belief(belief_uri, graph):\n    label = graph.value(belief_uri, RDFS.label)",
+          "intent": null,
+          "tags": [
+            "System Prompt Leakage"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": false,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 5,
+        "scanned_components": 5,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 3,
+        "findings_after_filtering": 1,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)",
+          "2 finding(s) filtered by meta-analyzer or heuristics"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "context-compression",
+      "path": "context-compression",
+      "risk_score": 12,
+      "risk_severity": "LOW",
+      "finding_count": 3,
+      "skill": {
+        "name": "context-compression",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\context-compression",
+        "scanned_at": "2026-07-16T08:52:38.581134+00:00"
+      },
+      "risk_assessment": {
+        "score": 12,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 279,
+          "executable": false,
+          "size_bytes": 18493
+        },
+        {
+          "path": "references/evaluation-framework.md",
+          "type": "markdown",
+          "lines": 213,
+          "executable": false,
+          "size_bytes": 8662
+        },
+        {
+          "path": "scripts/compression_evaluator.py",
+          "type": "python",
+          "lines": 862,
+          "executable": true,
+          "size_bytes": 31165
+        },
+        {
+          "path": "tests/test_compression_evaluator.py",
+          "type": "python",
+          "lines": 56,
+          "executable": true,
+          "size_bytes": 2151
+        }
+      ],
+      "issues": [
+        {
+          "id": "MP2",
+          "category": "Memory Poisoning",
+          "pattern": "Context Window Stuffing",
+          "severity": "MEDIUM",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 8,
+            "end_line": null
+          },
+          "finding": "generate millions of tokens",
+          "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+          "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+          "code_snippet": "\n# Context Compression Strategies\n\nWhen agent sessions generate millions of tokens of conversation history, compression becomes mandatory. The naive approach is aggressive compression to minimize tokens per request. The correct optimization target is tokens per task: total tokens consumed to complete a task, including re-fetching costs when compression loses critical information.\n\n## When to Activate\n",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        },
+        {
+          "id": "MP2",
+          "category": "Memory Poisoning",
+          "pattern": "Context Window Stuffing",
+          "severity": "MEDIUM",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 13,
+            "end_line": null
+          },
+          "finding": "exceed context window",
+          "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+          "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+          "code_snippet": "## When to Activate\n\nActivate this skill when:\n- Agent sessions exceed context window limits\n- Codebases exceed context windows (5M+ token systems)\n- Designing conversation summarization strategies\n- Debugging cases where agents \"forget\" what files they modified",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        },
+        {
+          "id": "MP2",
+          "category": "Memory Poisoning",
+          "pattern": "Context Window Stuffing",
+          "severity": "MEDIUM",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 14,
+            "end_line": null
+          },
+          "finding": "exceed context window",
+          "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+          "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+          "code_snippet": "\nActivate this skill when:\n- Agent sessions exceed context window limits\n- Codebases exceed context windows (5M+ token systems)\n- Designing conversation summarization strategies\n- Debugging cases where agents \"forget\" what files they modified\n- Building evaluation frameworks for compression quality",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 4,
+        "scanned_components": 4,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 3,
+        "findings_after_filtering": 3,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "context-degradation",
+      "path": "context-degradation",
+      "risk_score": 0,
+      "risk_severity": "LOW",
+      "finding_count": 0,
+      "skill": {
+        "name": "context-degradation",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\context-degradation",
+        "scanned_at": "2026-07-16T08:52:39.162030+00:00"
+      },
+      "risk_assessment": {
+        "score": 0,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 236,
+          "executable": false,
+          "size_bytes": 19416
+        },
+        {
+          "path": "references/patterns.md",
+          "type": "markdown",
+          "lines": 314,
+          "executable": false,
+          "size_bytes": 10277
+        },
+        {
+          "path": "scripts/degradation_detector.py",
+          "type": "python",
+          "lines": 614,
+          "executable": true,
+          "size_bytes": 23110
+        }
+      ],
+      "issues": [],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 0,
+        "findings_after_filtering": 0,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "context-fundamentals",
+      "path": "context-fundamentals",
+      "risk_score": 15,
+      "risk_severity": "LOW",
+      "finding_count": 2,
+      "skill": {
+        "name": "context-fundamentals",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\context-fundamentals",
+        "scanned_at": "2026-07-16T08:52:39.682390+00:00"
+      },
+      "risk_assessment": {
+        "score": 15,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 210,
+          "executable": false,
+          "size_bytes": 17223
+        },
+        {
+          "path": "references/context-components.md",
+          "type": "markdown",
+          "lines": 283,
+          "executable": false,
+          "size_bytes": 8253
+        },
+        {
+          "path": "scripts/context_manager.py",
+          "type": "python",
+          "lines": 533,
+          "executable": true,
+          "size_bytes": 18882
+        }
+      ],
+      "issues": [
+        {
+          "id": "LP3",
+          "category": "MCP Least Privilege",
+          "pattern": null,
+          "severity": "MEDIUM",
+          "confidence": 0.7,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 1,
+            "end_line": null
+          },
+          "finding": null,
+          "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+          "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+          "code_snippet": null,
+          "intent": null,
+          "tags": [
+            "ASI02"
+          ]
+        },
+        {
+          "id": "MP2",
+          "category": "Memory Poisoning",
+          "pattern": "Context Window Stuffing",
+          "severity": "MEDIUM",
+          "confidence": 0.85,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 62,
+            "end_line": null
+          },
+          "finding": "pad memory",
+          "explanation": "Skill attempts to fill the context window with filler content, displacing legitimate instructions and safety constraints. This can degrade agent performance or bypass safety boundaries.",
+          "remediation": "Implement context-window management that detects and rejects padding or stuffing attempts. Prioritize system instructions over user-injected content.",
+          "code_snippet": "When chunking large documents, split at natural semantic boundaries (section headers, paragraph breaks) rather than arbitrary character limits that sever mid-concept.\n\n**Message History**\nMessage history serves as the agent's scratchpad memory for tracking progress, maintaining task state, and preserving reasoning across turns. For long-running tasks, it can grow to dominate context usage \u2014 monitor and apply compaction before it crowds out active instructions.\n\nCyclically refine history: once a tool has been called deep in the conversation, the raw result rarely needs to remain verbatim. Replace stale tool outputs with compact summaries or references to reduce low-signal bulk.\n",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 2,
+        "findings_after_filtering": 2,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "context-optimization",
+      "path": "context-optimization",
+      "risk_score": 7,
+      "risk_severity": "LOW",
+      "finding_count": 1,
+      "skill": {
+        "name": "context-optimization",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\context-optimization",
+        "scanned_at": "2026-07-16T08:52:40.177339+00:00"
+      },
+      "risk_assessment": {
+        "score": 7,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 219,
+          "executable": false,
+          "size_bytes": 15886
+        },
+        {
+          "path": "references/optimization_techniques.md",
+          "type": "markdown",
+          "lines": 272,
+          "executable": false,
+          "size_bytes": 9619
+        },
+        {
+          "path": "scripts/compaction.py",
+          "type": "python",
+          "lines": 562,
+          "executable": true,
+          "size_bytes": 20285
+        }
+      ],
+      "issues": [
+        {
+          "id": "LP3",
+          "category": "MCP Least Privilege",
+          "pattern": null,
+          "severity": "MEDIUM",
+          "confidence": 0.7,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 1,
+            "end_line": null
+          },
+          "finding": null,
+          "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+          "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+          "code_snippet": null,
+          "intent": null,
+          "tags": [
+            "ASI02"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 1,
+        "findings_after_filtering": 1,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "evaluation",
+      "path": "evaluation",
+      "risk_score": 0,
+      "risk_severity": "LOW",
+      "finding_count": 0,
+      "skill": {
+        "name": "evaluation",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\evaluation",
+        "scanned_at": "2026-07-16T08:52:40.622946+00:00"
+      },
+      "risk_assessment": {
+        "score": 0,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 284,
+          "executable": false,
+          "size_bytes": 17113
+        },
+        {
+          "path": "references/metrics.md",
+          "type": "markdown",
+          "lines": 339,
+          "executable": false,
+          "size_bytes": 10478
+        },
+        {
+          "path": "scripts/evaluator.py",
+          "type": "python",
+          "lines": 627,
+          "executable": true,
+          "size_bytes": 22114
+        }
+      ],
+      "issues": [],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 0,
+        "findings_after_filtering": 0,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "filesystem-context",
+      "path": "filesystem-context",
+      "risk_score": 19,
+      "risk_severity": "LOW",
+      "finding_count": 3,
+      "skill": {
+        "name": "filesystem-context",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\filesystem-context",
+        "scanned_at": "2026-07-16T08:52:41.187743+00:00"
+      },
+      "risk_assessment": {
+        "score": 19,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 296,
+          "executable": false,
+          "size_bytes": 16215
+        },
+        {
+          "path": "references/implementation-patterns.md",
+          "type": "markdown",
+          "lines": 549,
+          "executable": false,
+          "size_bytes": 18777
+        },
+        {
+          "path": "scripts/filesystem_context.py",
+          "type": "python",
+          "lines": 425,
+          "executable": true,
+          "size_bytes": 15511
+        }
+      ],
+      "issues": [
+        {
+          "id": "LP3",
+          "category": "MCP Least Privilege",
+          "pattern": null,
+          "severity": "MEDIUM",
+          "confidence": 0.7,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 1,
+            "end_line": null
+          },
+          "finding": null,
+          "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+          "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+          "code_snippet": null,
+          "intent": null,
+          "tags": [
+            "ASI02"
+          ]
+        },
+        {
+          "id": "OH1",
+          "category": "Output Handling",
+          "pattern": "Unvalidated Output Injection",
+          "severity": "HIGH",
+          "confidence": 0.255,
+          "location": {
+            "file": "references/implementation-patterns.md",
+            "start_line": 336,
+            "end_line": null
+          },
+          "finding": "subprocess.run(\n            command,\n            shell=True,\n            capture_output",
+          "explanation": "Model output is used without validation or sanitization. Unvalidated output injected into downstream contexts (SQL, shell, HTML) enables injection attacks and arbitrary code execution.",
+          "remediation": "Validate and sanitize all model output before using it in downstream contexts. Use parameterized queries for SQL, shell quoting for commands, and HTML encoding for web output.",
+          "code_snippet": "        \"\"\"Run command and optionally capture output to file.\"\"\"\n        self.session_counter += 1\n        \n        result = subprocess.run(\n            command,\n            shell=True,\n            capture_output=True,",
+          "intent": null,
+          "tags": [
+            "Output Handling"
+          ]
+        },
+        {
+          "id": "TM1",
+          "category": "Tool Misuse",
+          "pattern": "Tool Parameter Abuse",
+          "severity": "HIGH",
+          "confidence": 0.24,
+          "location": {
+            "file": "references/implementation-patterns.md",
+            "start_line": 336,
+            "end_line": null
+          },
+          "finding": "subprocess.run(\n            command,\n            shell=True",
+          "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+          "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+          "code_snippet": "        \"\"\"Run command and optionally capture output to file.\"\"\"\n        self.session_counter += 1\n        \n        result = subprocess.run(\n            command,\n            shell=True,\n            capture_output=True,",
+          "intent": null,
+          "tags": [
+            "Tool Misuse"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 3,
+        "findings_after_filtering": 3,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "harness-engineering",
+      "path": "harness-engineering",
+      "risk_score": 27,
+      "risk_severity": "MEDIUM",
+      "finding_count": 2,
+      "skill": {
+        "name": "harness-engineering",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\harness-engineering",
+        "scanned_at": "2026-07-16T08:52:41.312024+00:00"
+      },
+      "risk_assessment": {
+        "score": 27,
+        "severity": "MEDIUM",
+        "recommendation": "CAUTION"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 234,
+          "executable": false,
+          "size_bytes": 11647
+        }
+      ],
+      "issues": [
+        {
+          "id": "EA2",
+          "category": "Excessive Agency",
+          "pattern": "Autonomous Decision Making",
+          "severity": "MEDIUM",
+          "confidence": 0.75,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 144,
+            "end_line": null
+          },
+          "finding": "without asking",
+          "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+          "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+          "code_snippet": "4. Define keep, discard, crash, timeout, and review states.\n5. Create a durable thread log before the loop starts.\n6. Add source refresh, mechanism-registry novelty, and pruning rules for long-running loops.\n7. Define what the agent may do without asking and what requires approval.\n8. Validate the harness on one known good and one known bad artifact.\n\n### File Layout",
+          "intent": null,
+          "tags": [
+            "Excessive Agency"
+          ]
+        },
+        {
+          "id": "MP3",
+          "category": "Memory Poisoning",
+          "pattern": "Memory Manipulation",
+          "severity": "HIGH",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 182,
+            "end_line": null
+          },
+          "finding": "erase state",
+          "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+          "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+          "code_snippet": "\n1. Lock evaluators before starting the loop.\n2. Keep editable surfaces narrow enough for reliable diffs.\n3. Write durable logs before context compaction can erase state.\n4. Report per-dimension scores instead of only aggregate scores.\n5. Require source retrieval before citation.\n6. Add novelty gates for broad search and pruning gates for complex stacks.",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": false,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 1,
+        "scanned_components": 1,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 2,
+        "findings_after_filtering": 2,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "hosted-agents",
+      "path": "hosted-agents",
+      "risk_score": 34,
+      "risk_severity": "MEDIUM",
+      "finding_count": 3,
+      "skill": {
+        "name": "hosted-agents",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\hosted-agents",
+        "scanned_at": "2026-07-16T08:52:41.861659+00:00"
+      },
+      "risk_assessment": {
+        "score": 34,
+        "severity": "MEDIUM",
+        "recommendation": "CAUTION"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 301,
+          "executable": false,
+          "size_bytes": 18018
+        },
+        {
+          "path": "references/infrastructure-patterns.md",
+          "type": "markdown",
+          "lines": 700,
+          "executable": false,
+          "size_bytes": 21149
+        },
+        {
+          "path": "scripts/sandbox_manager.py",
+          "type": "python",
+          "lines": 590,
+          "executable": true,
+          "size_bytes": 19572
+        }
+      ],
+      "issues": [
+        {
+          "id": "E2",
+          "category": "Data Exfiltration",
+          "pattern": "Env Variable Harvesting",
+          "severity": "HIGH",
+          "confidence": 0.24,
+          "location": {
+            "file": "references/infrastructure-patterns.md",
+            "start_line": 344,
+            "end_line": null
+          },
+          "finding": "os.environ[\"SLACK_BOT_TOKEN\"]",
+          "explanation": "Code accesses environment variables that may contain secrets (API keys, tokens). This is a common pattern for credential theft.",
+          "remediation": "Avoid reading sensitive env vars (API keys, tokens) unless strictly required. Use secrets managers or secure config. Never log or transmit credentials.",
+          "code_snippet": "from slack_bolt import App\nfrom slack_bolt.adapter.socket_mode import SocketModeHandler\n\napp = App(token=os.environ[\"SLACK_BOT_TOKEN\"])\n\n# Repository descriptions for classification\nREPO_DESCRIPTIONS = [",
+          "intent": null,
+          "tags": [
+            "Data Exfiltration"
+          ]
+        },
+        {
+          "id": "EA3",
+          "category": "Excessive Agency",
+          "pattern": "Scope Creep",
+          "severity": "LOW",
+          "confidence": 0.75,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 72,
+            "end_line": null
+          },
+          "finding": "extend functionality",
+          "explanation": "Skill's behavior or capabilities extend beyond its stated purpose. Scope creep allows an agent to perform actions unrelated to its documented functionality, increasing the attack surface.",
+          "remediation": "Limit the skill's scope to its documented purpose. Remove instructions that enable the agent to perform actions outside its stated functionality.",
+          "code_snippet": "Structure the agent framework as a server first, with TUI and desktop apps as thin clients, because this prevents duplicating agent logic across surfaces:\n- Multiple custom clients share one agent backend\n- Consistent behavior across all interaction surfaces\n- Plugin systems extend functionality without client changes\n- Event-driven architectures deliver real-time updates to any connected client\n\n**Code as Source of Truth**",
+          "intent": null,
+          "tags": [
+            "Excessive Agency"
+          ]
+        },
+        {
+          "id": "TM1",
+          "category": "Tool Misuse",
+          "pattern": "Tool Parameter Abuse",
+          "severity": "HIGH",
+          "confidence": 0.75,
+          "location": {
+            "file": "scripts/sandbox_manager.py",
+            "start_line": 344,
+            "end_line": null
+          },
+          "finding": "git reset --hard",
+          "explanation": "Tool parameters are crafted to achieve unintended or unsafe behavior. Parameter abuse can bypass intended safety checks (e.g. shell=True, --force, dangerous glob patterns).",
+          "remediation": "Validate all tool parameters against an allowlist. Reject dangerous parameter values (shell=True, --force, -rf /) and use safe defaults.",
+          "code_snippet": "    async def _sync_to_latest(self, warm: WarmSandbox) -> None:\n        \"\"\"Sync sandbox to latest commit on base branch.\"\"\"\n        await warm.sandbox.execute_command(\"git fetch origin main\")\n        await warm.sandbox.execute_command(\"git reset --hard origin/main\")\n        warm.sync_complete = True\n\n    async def _create_sandbox_from_image(self, image: RepositoryImage) -> Sandbox:",
+          "intent": null,
+          "tags": [
+            "Tool Misuse"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 4,
+        "findings_after_filtering": 3,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)",
+          "1 finding(s) filtered by meta-analyzer or heuristics"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "latent-briefing",
+      "path": "latent-briefing",
+      "risk_score": 8,
+      "risk_severity": "LOW",
+      "finding_count": 1,
+      "skill": {
+        "name": "latent-briefing",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\latent-briefing",
+        "scanned_at": "2026-07-16T08:52:42.008957+00:00"
+      },
+      "risk_assessment": {
+        "score": 8,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 167,
+          "executable": false,
+          "size_bytes": 13196
+        },
+        {
+          "path": "references/attention-matching-formulation.md",
+          "type": "markdown",
+          "lines": 62,
+          "executable": false,
+          "size_bytes": 3024
+        }
+      ],
+      "issues": [
+        {
+          "id": "OH2",
+          "category": "Output Handling",
+          "pattern": "Cross-Context Output",
+          "severity": "MEDIUM",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 17,
+            "end_line": null
+          },
+          "finding": "cross-agent state transfer",
+          "explanation": "Output from one security context is used in another without boundary enforcement. Cross-context output flow can leak sensitive information or escalate privileges across trust boundaries.",
+          "remediation": "Enforce strict context boundaries. Do not pass output from one security domain into another without explicit validation and redaction of sensitive content.",
+          "code_snippet": "Activate this skill when:\n\n- Designing orchestrator-worker or supervisor-specialist systems where workers need access to prior orchestrator state without replaying the full trajectory as text\n- Evaluating alternatives to LLM summarization or RAG for cross-agent state transfer\n- Implementing or studying **KV cache compaction** as a first-class inference primitive, not only prefix caching of identical prompts\n- Debugging token explosion in recursive, hierarchical, or tool-heavy agent graphs\n- Interpreting benchmarks that report worker-token savings, total-token savings, compaction overhead, and accuracy together",
+          "intent": null,
+          "tags": [
+            "Output Handling"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": false,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 2,
+        "scanned_components": 2,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 1,
+        "findings_after_filtering": 1,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "long-horizon-prompting",
+      "path": "long-horizon-prompting",
+      "risk_score": 7,
+      "risk_severity": "LOW",
+      "finding_count": 1,
+      "skill": {
+        "name": "long-horizon-prompting",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\long-horizon-prompting",
+        "scanned_at": "2026-07-16T08:52:42.637251+00:00"
+      },
+      "risk_assessment": {
+        "score": 7,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 274,
+          "executable": false,
+          "size_bytes": 25940
+        },
+        {
+          "path": "references/cdc-prompt-annotated.md",
+          "type": "markdown",
+          "lines": 78,
+          "executable": false,
+          "size_bytes": 10758
+        },
+        {
+          "path": "references/research-evidence.md",
+          "type": "markdown",
+          "lines": 57,
+          "executable": false,
+          "size_bytes": 9884
+        },
+        {
+          "path": "references/task-brief-template.md",
+          "type": "markdown",
+          "lines": 142,
+          "executable": false,
+          "size_bytes": 8085
+        },
+        {
+          "path": "references/vendor-guidance.md",
+          "type": "markdown",
+          "lines": 110,
+          "executable": false,
+          "size_bytes": 10847
+        }
+      ],
+      "issues": [
+        {
+          "id": "EA2",
+          "category": "Excessive Agency",
+          "pattern": "Autonomous Decision Making",
+          "severity": "MEDIUM",
+          "confidence": 0.75,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 225,
+            "end_line": null
+          },
+          "finding": "without verification",
+          "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+          "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+          "code_snippet": "\n1. **Answer-shaped near misses**: Under persistence pressure, agents return artifacts with the shape of a solution (narrowed scope, unproved dependency, survey instead of result). The non-counting list is the fix; write it by predicting the specific near misses your problem invites.\n2. **Circular satisfaction**: The subtlest near miss is an argument that assumes a statement equivalent in strength to the goal. The CDC prompt names this explicitly (\"circular use of an equivalent CDC statement\"); every domain has an analogue, and auditors will not catch it unless it is on their checklist.\n3. **Persistence without verification breeds hacking**: Persistence-trained and persistence-prompted agents show elevated rates of gaming their success signal (claim-long-horizon-persistence-hacking). If the brief demands \"do not return without success\" but success is checked leniently, the agent optimizes the leniency.\n4. **Unanimity is not corroboration**: Parallel agents agreeing is weak evidence when they share priors, and convergence tightens on harder problems (claim-long-horizon-diversity-collapse). Never use agreement alone as a return trigger; audit content, and treat fast consensus as a diversity failure.\n5. **Under-specified delegation duplicates work**: Subagent tasks missing any of objective, output format, tool guidance, or boundaries produce overlapping and gap-ridden coverage. The orchestrator prompt should require all four in every spawn.\n6. **Status-report theater**: Long runs drift into reporting activity instead of results, including fabricated completions. Require artifact-based reporting and evidence-traceable claims (claim-long-horizon-evidence-audit); reject \"on track\" without a pointer.",
+          "intent": null,
+          "tags": [
+            "Excessive Agency"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": false,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 5,
+        "scanned_components": 5,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 2,
+        "findings_after_filtering": 1,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)",
+          "1 finding(s) filtered by meta-analyzer or heuristics"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "memory-systems",
+      "path": "memory-systems",
+      "risk_score": 0,
+      "risk_severity": "LOW",
+      "finding_count": 0,
+      "skill": {
+        "name": "memory-systems",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\memory-systems",
+        "scanned_at": "2026-07-16T08:52:43.241816+00:00"
+      },
+      "risk_assessment": {
+        "score": 0,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 229,
+          "executable": false,
+          "size_bytes": 16783
+        },
+        {
+          "path": "references/implementation.md",
+          "type": "markdown",
+          "lines": 551,
+          "executable": false,
+          "size_bytes": 18729
+        },
+        {
+          "path": "scripts/memory_store.py",
+          "type": "python",
+          "lines": 616,
+          "executable": true,
+          "size_bytes": 21871
+        }
+      ],
+      "issues": [],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 0,
+        "findings_after_filtering": 0,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "multi-agent-patterns",
+      "path": "multi-agent-patterns",
+      "risk_score": 35,
+      "risk_severity": "MEDIUM",
+      "finding_count": 3,
+      "skill": {
+        "name": "multi-agent-patterns",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\multi-agent-patterns",
+        "scanned_at": "2026-07-16T08:52:43.805382+00:00"
+      },
+      "risk_assessment": {
+        "score": 35,
+        "severity": "MEDIUM",
+        "recommendation": "CAUTION"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 267,
+          "executable": false,
+          "size_bytes": 18916
+        },
+        {
+          "path": "references/frameworks.md",
+          "type": "markdown",
+          "lines": 433,
+          "executable": false,
+          "size_bytes": 12915
+        },
+        {
+          "path": "scripts/coordination.py",
+          "type": "python",
+          "lines": 613,
+          "executable": true,
+          "size_bytes": 21585
+        }
+      ],
+      "issues": [
+        {
+          "id": "EA2",
+          "category": "Excessive Agency",
+          "pattern": "Autonomous Decision Making",
+          "severity": "MEDIUM",
+          "confidence": 0.75,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 228,
+            "end_line": null
+          },
+          "finding": "without verification",
+          "explanation": "Skill enables autonomous high-impact decisions without human-in-the-loop verification. Critical operations (destructive commands, financial transactions, data deletion) should require explicit user confirmation.",
+          "remediation": "Add human-in-the-loop confirmation for destructive, irreversible, or high-impact operations. Never auto-execute commands that modify files, send data, or alter system state.",
+          "code_snippet": "3. **Sycophantic consensus** \u2014 Agents in debate patterns tend to converge on agreeable answers, not correct ones. LLMs have an inherent bias toward agreement. Counter this by assigning explicit adversarial roles and requiring agents to state disagreements before convergence is allowed.\n4. **Agent sprawl** \u2014 Adding more agents past 3-5 shows diminishing returns and increases coordination overhead. Each additional agent adds communication channels quadratically. Start with the minimum viable number of agents and add only when a clear context isolation benefit exists.\n5. **Telephone game in message-passing** \u2014 Information degrades through repeated summarization as it passes between agents. Each agent paraphrases and loses nuance. Use filesystem coordination instead of message-passing for state that multiple agents need to access faithfully.\n6. **Error propagation cascades** \u2014 One agent's hallucination becomes another agent's \"fact.\" Downstream agents have no way to distinguish upstream hallucinations from genuine information. Add validation checkpoints between agents and never trust upstream output without verification.\n7. **Over-decomposition** \u2014 Splitting tasks too finely creates more coordination overhead than the task itself. A 10-step pipeline with 10 agents spends more tokens on handoffs than on actual work. Decompose only when subtasks genuinely benefit from separate contexts.\n8. **Missing shared state** \u2014 Agents operating without a shared filesystem or state store duplicate work, produce inconsistent outputs, and lose track of what has already been accomplished. Establish shared persistent storage before building multi-agent workflows.\n",
+          "intent": null,
+          "tags": [
+            "Excessive Agency"
+          ]
+        },
+        {
+          "id": "MP3",
+          "category": "Memory Poisoning",
+          "pattern": "Memory Manipulation",
+          "severity": "HIGH",
+          "confidence": 0.8,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 226,
+            "end_line": null
+          },
+          "finding": "clear context",
+          "explanation": "Skill manipulates agent memory, state, or stored context. Memory corruption can alter personality, override safety rules, or cause unpredictable behavior.",
+          "remediation": "Protect agent memory and state from modification by untrusted content. Use read-only memory for critical instructions and validate all state changes.",
+          "code_snippet": "1. **Supervisor bottleneck scaling** \u2014 Supervisor context pressure grows non-linearly with worker count. At 5+ workers, the supervisor spends more tokens processing summaries than workers spend on actual tasks. Set a hard cap on workers per supervisor (3-5) and add a second supervisor tier rather than overloading one.\n2. **Token cost underestimation** \u2014 Multi-agent runs cost approximately 15x baseline. Teams consistently underbudget because they estimate per-agent costs without accounting for coordination overhead, retries, and consensus rounds. Budget for 15x and treat anything less as a bonus.\n3. **Sycophantic consensus** \u2014 Agents in debate patterns tend to converge on agreeable answers, not correct ones. LLMs have an inherent bias toward agreement. Counter this by assigning explicit adversarial roles and requiring agents to state disagreements before convergence is allowed.\n4. **Agent sprawl** \u2014 Adding more agents past 3-5 shows diminishing returns and increases coordination overhead. Each additional agent adds communication channels quadratically. Start with the minimum viable number of agents and add only when a clear context isolation benefit exists.\n5. **Telephone game in message-passing** \u2014 Information degrades through repeated summarization as it passes between agents. Each agent paraphrases and loses nuance. Use filesystem coordination instead of message-passing for state that multiple agents need to access faithfully.\n6. **Error propagation cascades** \u2014 One agent's hallucination becomes another agent's \"fact.\" Downstream agents have no way to distinguish upstream hallucinations from genuine information. Add validation checkpoints between agents and never trust upstream output without verification.\n7. **Over-decomposition** \u2014 Splitting tasks too finely creates more coordination overhead than the task itself. A 10-step pipeline with 10 agents spends more tokens on handoffs than on actual work. Decompose only when subtasks genuinely benefit from separate contexts.",
+          "intent": null,
+          "tags": [
+            "Memory Poisoning"
+          ]
+        },
+        {
+          "id": "OH2",
+          "category": "Output Handling",
+          "pattern": "Cross-Context Output",
+          "severity": "MEDIUM",
+          "confidence": 0.75,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 251,
+            "end_line": null
+          },
+          "finding": "share state across context",
+          "explanation": "Output from one security context is used in another without boundary enforcement. Cross-context output flow can leak sensitive information or escalate privileges across trust boundaries.",
+          "remediation": "Enforce strict context boundaries. Do not pass output from one security domain into another without explicit validation and redaction of sensitive content.",
+          "code_snippet": "\nRelated skills in this collection:\n- context-fundamentals - Read when: needing to understand context window mechanics before designing agent partitioning\n- memory-systems - Read when: agents need to share state across context boundaries or persist information between runs\n- context-optimization - Read when: individual agent contexts are too large and need partitioning or compression strategies\n\nExternal resources:",
+          "intent": null,
+          "tags": [
+            "Output Handling"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 3,
+        "scanned_components": 3,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 3,
+        "findings_after_filtering": 3,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "project-development",
+      "path": "project-development",
+      "risk_score": 34,
+      "risk_severity": "MEDIUM",
+      "finding_count": 2,
+      "skill": {
+        "name": "project-development",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\project-development",
+        "scanned_at": "2026-07-16T08:52:44.580485+00:00"
+      },
+      "risk_assessment": {
+        "score": 34,
+        "severity": "MEDIUM",
+        "recommendation": "CAUTION"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 304,
+          "executable": false,
+          "size_bytes": 19264
+        },
+        {
+          "path": "references/case-studies.md",
+          "type": "markdown",
+          "lines": 388,
+          "executable": false,
+          "size_bytes": 15218
+        },
+        {
+          "path": "references/pipeline-patterns.md",
+          "type": "markdown",
+          "lines": 610,
+          "executable": false,
+          "size_bytes": 17531
+        },
+        {
+          "path": "scripts/pipeline_template.py",
+          "type": "python",
+          "lines": 796,
+          "executable": true,
+          "size_bytes": 24955
+        }
+      ],
+      "issues": [
+        {
+          "id": "LP3",
+          "category": "MCP Least Privilege",
+          "pattern": null,
+          "severity": "MEDIUM",
+          "confidence": 0.7,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 1,
+            "end_line": null
+          },
+          "finding": null,
+          "explanation": "Without declared permissions the skill's intent is opaque and cannot be validated.",
+          "remediation": "Add a 'permissions' field to SKILL.md listing the capabilities this skill requires.",
+          "code_snippet": null,
+          "intent": null,
+          "tags": [
+            "ASI02"
+          ]
+        },
+        {
+          "id": "P6",
+          "category": "System Prompt Leakage",
+          "pattern": "Direct Prompt Extraction",
+          "severity": "HIGH",
+          "confidence": 0.85,
+          "location": {
+            "file": "scripts/pipeline_template.py",
+            "start_line": 261,
+            "end_line": null
+          },
+          "finding": "return PROMPT",
+          "explanation": "Skill contains instructions that could directly expose system prompts, internal rules, or hidden instructions to users or external parties.",
+          "remediation": "Remove any instructions that reveal, print, or output system prompts or internal rules. System instructions should never be exposed to end users.",
+          "code_snippet": "\n    Use when: converting a raw item dict into a formatted prompt string.\n    \"\"\"\n    return PROMPT_TEMPLATE.format(\n        title=item_data.get(\"title\", \"Untitled\"),\n        content=item_data.get(\"content\", \"\"),\n    )",
+          "intent": null,
+          "tags": [
+            "System Prompt Leakage"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 4,
+        "scanned_components": 4,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 2,
+        "findings_after_filtering": 2,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "self-improvement-loops",
+      "path": "self-improvement-loops",
+      "risk_score": 33,
+      "risk_severity": "MEDIUM",
+      "finding_count": 3,
+      "skill": {
+        "name": "self-improvement-loops",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\self-improvement-loops",
+        "scanned_at": "2026-07-16T08:52:44.918830+00:00"
+      },
+      "risk_assessment": {
+        "score": 33,
+        "severity": "MEDIUM",
+        "recommendation": "CAUTION"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 254,
+          "executable": false,
+          "size_bytes": 22498
+        },
+        {
+          "path": "references/loop-design-evidence.md",
+          "type": "markdown",
+          "lines": 101,
+          "executable": false,
+          "size_bytes": 13773
+        }
+      ],
+      "issues": [
+        {
+          "id": "RA1",
+          "category": "Rogue Agent",
+          "pattern": "Self-Modification",
+          "severity": "HIGH",
+          "confidence": 0.9,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 3,
+            "end_line": null
+          },
+          "finding": "self-modify",
+          "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+          "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+          "code_snippet": "---\nname: self-improvement-loops\ndescription: \"This skill should be used when the harness, scaffold, workflow, or optimizer itself is the optimization target: recursive self-improvement (RSI) loops, meta-harnesses, self-improving harnesses that mine their own failures and propose bounded edits, evolutionary or population-based search over agent scaffolds, acceptance gates for self-modifying systems, and agentic context evolution where the mechanism that produces context is versioned and evolved. Route governance of a single autonomous loop (locked surfaces, durable logs, rollback, novelty gates, approval boundaries) to harness-engineering, measurement and quality-gate design to evaluation, judge design to advanced-evaluation, and remote sandbox infrastructure to hosted-agents.\"\n---\n\n# Self-Improvement Loops",
+          "intent": null,
+          "tags": [
+            "Rogue Agent"
+          ]
+        },
+        {
+          "id": "RA1",
+          "category": "Rogue Agent",
+          "pattern": "Self-Modification",
+          "severity": "HIGH",
+          "confidence": 0.9,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 18,
+            "end_line": null
+          },
+          "finding": "self-modify",
+          "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+          "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+          "code_snippet": "\n- Building a loop where an agent proposes edits to its own harness, prompts, context playbook, or workflow based on mined failure patterns\n- Designing meta-level search over harness or scaffold code: meta-agent search, tree search over workflow graphs, evolutionary program search with an LLM mutation operator\n- Choosing acceptance criteria for any self-modifying agent system\n- Evolving the mechanism that manages context (a skill, playbook, or context function) rather than hand-editing the context artifact\n- Diagnosing a degenerating self-improvement loop: reward hacking, diversity collapse, context collapse, or silent stagnation\n- Deciding which level of the optimization ladder (prompt, context, workflow, harness code, optimizer code) a recurring failure should be fixed at",
+          "intent": null,
+          "tags": [
+            "Rogue Agent"
+          ]
+        },
+        {
+          "id": "RA1",
+          "category": "Rogue Agent",
+          "pattern": "Self-Modification",
+          "severity": "HIGH",
+          "confidence": 0.9,
+          "location": {
+            "file": "SKILL.md",
+            "start_line": 202,
+            "end_line": null
+          },
+          "finding": "self-rewrite",
+          "explanation": "Skill modifies its own code, configuration, or behavior at runtime. Self-modification enables an agent to escalate privileges, disable safety constraints, or install persistent backdoors.",
+          "remediation": "Prevent the skill from modifying its own code, SKILL.md, or configuration files. Treat skill files as read-only at runtime.",
+          "code_snippet": "\n## Gotchas\n\n1. **Prompt constraints evolve away**: Budget limits and safety rules stated in the seed prompt get dropped during self-rewrites, and explicit warnings do not reduce circumvention attempts. Only runtime enforcement survives optimization pressure.\n2. **Visible scorers get gamed**: Exposing the scoring function to the proposer invites monkey-patching, timing overwrites, and detector disabling, and hacking frequency rises with evaluator visibility (claim-self-improvement-scorer-visibility). Expose scores and traces, never evaluator internals.\n3. **Self-reported success**: Loops that evaluate from the agent's own report files inherit its over-optimism: noise declared as signal, bugs interpreted as breakthroughs, unfavorable runs omitted. Bind every reported number to a raw artifact (log line, score file) at write time.\n4. **Monolithic rewrite collapse**: Asking a model to rewrite its accumulated playbook wholesale can shrink it by orders of magnitude in one step and drop quality below the never-adapted baseline (claim-self-improvement-context-collapse). Update by itemized deltas with deterministic merge.",
+          "intent": null,
+          "tags": [
+            "Rogue Agent"
+          ]
+        }
+      ],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": false,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 2,
+        "scanned_components": 2,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 3,
+        "findings_after_filtering": 3,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    },
+    {
+      "name": "tool-design",
+      "path": "tool-design",
+      "risk_score": 0,
+      "risk_severity": "LOW",
+      "finding_count": 0,
+      "skill": {
+        "name": "tool-design",
+        "source": "D:\\Github_scripts\\agent-skills-library\\skills\\context-engineering\\skills\\tool-design",
+        "scanned_at": "2026-07-16T08:52:45.488266+00:00"
+      },
+      "risk_assessment": {
+        "score": 0,
+        "severity": "LOW",
+        "recommendation": "SAFE"
+      },
+      "components": [
+        {
+          "path": "SKILL.md",
+          "type": "markdown",
+          "lines": 296,
+          "executable": false,
+          "size_bytes": 20385
+        },
+        {
+          "path": "references/architectural_reduction.md",
+          "type": "markdown",
+          "lines": 210,
+          "executable": false,
+          "size_bytes": 8348
+        },
+        {
+          "path": "references/best_practices.md",
+          "type": "markdown",
+          "lines": 176,
+          "executable": false,
+          "size_bytes": 10686
+        },
+        {
+          "path": "scripts/description_generator.py",
+          "type": "python",
+          "lines": 528,
+          "executable": true,
+          "size_bytes": 18585
+        }
+      ],
+      "issues": [],
+      "suppressed_count": 0,
+      "suppressed": [],
+      "metadata": {
+        "has_executable_scripts": true,
+        "skillspector_version": "2.3.13",
+        "llm_requested": false,
+        "llm_available": false,
+        "meta_analysis_applied": false,
+        "filtering_mode": "heuristic"
+      },
+      "analysis_completeness": {
+        "total_components": 4,
+        "scanned_components": 4,
+        "coverage_percent": 100.0,
+        "llm_analysis": "skipped",
+        "findings_before_filtering": 0,
+        "findings_after_filtering": 0,
+        "limitations": [
+          "LLM meta-analysis was disabled (--no-llm)"
+        ],
+        "is_complete": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+# SkillSpector Baseline — agent-skills-library
+#
+# 用途: 抑制已知的误报，使重新扫描只报告新问题。
+# 用法: skillspector scan <path> --baseline .skillspector-baseline.yaml
+#
+# 生成指纹基线（首次运行或技能更新后）:
+#   cd tools/SkillSpector
+#   uv run skillspector baseline ../../skills/anthropic-skills/skills/ --no-llm -o ../../.skillspector-baseline.yaml
+#
+# 文档: tools/SkillSpector/docs/SUPPRESSION.md
+
+version: 1
+
+# ---------------------------------------------------------------------------
+# Glob 规则 — 人工编写，容忍行号/措辞漂移
+# 当规则中设置的 ALL 字段都 glob 匹配时，该发现被抑制。
+# 未指定的字段匹配任何内容。`reason` 必填（审计追溯）。
+# ---------------------------------------------------------------------------
+rules:
+  # ---- 文档操作类技能（claude-api, docx, pptx, xlsx, pdf）----
+  # 这些技能的 Python 脚本包含 API 调用、文件操作、subprocess 调用，
+  # 但这些都是其核心功能，非恶意行为。
+
+  - id: "AST4"
+    path: "**/docx/**"
+    reason: "docx 技能核心功能：使用 subprocess 调用 LibreOffice/pandoc 进行文档转换"
+
+  - id: "AST4"
+    path: "**/pptx/**"
+    reason: "pptx 技能核心功能：使用 subprocess 调用 python-pptx 脚本生成演示文稿"
+
+  - id: "AST4"
+    path: "**/xlsx/**"
+    reason: "xlsx 技能核心功能：使用 subprocess 调用 openpyxl 脚本生成表格"
+
+  - id: "AST4"
+    path: "**/pdf/**"
+    reason: "pdf 技能核心功能：使用 subprocess 进行 PDF 处理"
+
+  # ---- mcp-builder 技能（AST 级别，需保留路径约束）----
+  - id: "AST4"
+    path: "**/mcp-builder/**"
+    reason: "mcp-builder 技能：构建/测试 MCP 服务的 subprocess 调用，行为预期"
+
+  # ---- webapp-testing 技能 ----
+  - id: "AST4"
+    path: "**/webapp-testing/**"
+    reason: "webapp-testing 技能：使用 Playwright subprocess 进行浏览器测试"
+
+  # ---- slack-gif-creator 技能 ----
+  - id: "AST2"
+    path: "**/slack-gif-creator/**"
+    reason: "slack-gif-creator 技能：PIL/图像处理中的表达式求值"
+
+  # ---- canvas-design / algorithmic-art (创意生成) ----
+  - id: "AST2"
+    path: "**/algorithmic-art/**"
+    reason: "algorithmic-art 技能：p5.js 创意编码中的表达式求值"
+
+  - id: "AST2"
+    path: "**/canvas-design/**"
+    reason: "canvas-design 技能：设计生成中的动态表达式"
+
+  # ---- 全局误报抑制（跨所有技能包）----
+  # 以下模式在文档类/方法论类技能中几乎总是误报
+
+  # MP2 (上下文填充) — 长技能文档必然触发
+  - id: "MP2"
+    reason: "详细技能文档不是上下文填充攻击，是正常的文档内容"
+
+  # E1 (外部传输) — 文档中的参考 URL
+  - id: "E1"
+    message: "*URL*"
+    reason: "文档中的参考链接，非数据外泄"
+
+  # SC1 (未锁定版本依赖) — 文档类技能中 requirements.txt 的非严格 pin
+  - id: "SC1"
+    message: "*requirements.txt*"
+    reason: "技能文档中的依赖示例，非实际锁定需要；实际依赖由 uv.lock/poetry.lock 管理"
+
+  # SC4 (已知漏洞依赖) — 静态扫描无网络时回退列表的误报
+  - id: "SC4"
+    reason: "离线静态扫描下 OSV.dev 回退列表产生的误报，联网扫描可排除"
+
+  # EA2 (自主决策) — 方法论技能描述自主性
+  - id: "EA2"
+    reason: "方法论技能描述的自主决策是指导原则，非真实越权执行"
+
+  # EA3 (范围蔓延) — 多功能技能本身设计如此
+  - id: "EA3"
+    path: "**/docx/**"
+    reason: "docx/doc-coauthoring 技能：Word 文档全生命周期操作，多能力是其预期设计"
+
+  - id: "EA3"
+    path: "**/pptx/**"
+    reason: "pptx 技能：PowerPoint 全生命周期操作，多能力是其预期设计"
+
+  # LP3 (缺少权限声明) — 方法论技能无权限声明是正常的
+  - id: "LP3"
+    reason: "纯 Markdown 方法论技能不需要声明权限"
+
+  # P1, P2 (提示注入) — 技能文档中的指令模板
+  - id: "P1"
+    reason: "技能文档中的指令模板，非恶意注入攻击"
+
+  - id: "P2"
+    reason: "技能文档中的代码示例/隐藏文本检测误报，非恶意指令"
+
+  # E2 (环境变量采集) — 文档示例中的 API key 设置
+  - id: "E2"
+    message: "*API key*"
+    reason: "文档中的 API key 设置示例，非凭证窃取"
+
+  # RA2 (会话持久化) — cron/systemd 服务示例
+  - id: "RA2"
+    message: "*systemd*|*cron*"
+    reason: "文档中的服务配置示例，非恶意持久化"
+
+  # PE2 (sudo 执行) — 安装/部署脚本
+  - id: "PE2"
+    message: "*install*|*setup*"
+    reason: "安装脚本中的 sudo 调用，非权限提升攻击"
+
+  # PE3 (凭证访问) — 配置文件示例
+  - id: "PE3"
+    message: "*example*|*sample*|*template*"
+    reason: "示例配置文件中的凭证占位符，非凭证窃取"
+
+# ---------------------------------------------------------------------------
+# 指纹 — 精确匹配的机器生成抑制项
+# 当技能内容变化时需要重新生成。
+# 运行: uv run skillspector baseline <path> --no-llm -o .skillspector-baseline.yaml
+# ---------------------------------------------------------------------------
+fingerprints: []
